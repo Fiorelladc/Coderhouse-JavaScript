@@ -8,9 +8,9 @@ function calcular_estadia() {
     let precioEstadia21dias = 70000;
     let resultado = 0;
 
-    if(estadia === 7 && cuotas === 1 ){
+    if (estadia === 7 && cuotas === 1 ){
         console.log ("El precio de los 7 dias y en 1 sola cuota es de $50.000");
-        ("El precio de los 7 dias y en 1 sola cuota es de $50.000");
+        alert("El precio de los 7 dias y en 1 sola cuota es de $50.000");
     }
     else if (estadia === 7 && cuotas === 3){
         resultado = precioEstadia7dias + (precioEstadia7dias * 0.15);
@@ -30,7 +30,7 @@ function calcular_estadia() {
     //comienza los precios de 14 dias 
     else if (estadia === 14 && cuotas === 1){
         console.log ("El precio de los 14 dias y en 1 sola cuota es de $60.000");
-        ("El precio de los 14 dias y en 1 sola cuota es de $60.000");
+        alert("El precio de los 14 dias y en 1 sola cuota es de $60.000");
     }
     
     else if (estadia === 14 && cuotas === 3){
