@@ -3,7 +3,7 @@ Ingreso();
 
 function calcular_estadia() {
     let nombre = prompt("INDICAR NOMBRE");
-    let fecha = prompt("INDICAR FECHA DE INICIO CON EL FORMATO DD/MM/AAAA");
+    let fecha = prompt("INDICAR FECHA DE INICIO CON EL FORMATO DD/MM/AAAA ( / obligatoria para separar)");
     let estadia = parseInt(prompt("INDICAR CUANTOS DIAS QUIERE QUEDARSE? 7 ,14 o 21 o 24"));
     let cuotas = parseInt(prompt("INGRESAR LA CANTIDAD DE CUOTAS: 1 , 3 ,6 o 12 o 24"));
     let resultado = DiasPrecio(estadia,cuotas);
@@ -34,18 +34,18 @@ function mostrarReservacion(){
 function fechaFinal(fecha, estadia){
     const lista_fecha = fecha.split('/')
     
-    var lista_fecha_int = [];
+    let lista_fecha_int = [];
     lista_fecha.forEach(element => {
         lista_fecha_int.push(parseInt(element))
     });
     if(lista_fecha_int[0]+estadia > 30){
         console.log("entre");
         lista_fecha_int[1] = lista_fecha_int[1] + 1;
-        var diaSuma = lista_fecha_int[0]+estadia;
+        let diaSuma = lista_fecha_int[0]+estadia;
         DiaFinal = diaSuma - 30; 
         lista_fecha_int[0] = DiaFinal;
     }else{
-        var diaSuma = lista_fecha_int[0]+estadia; 
+        let diaSuma = lista_fecha_int[0]+estadia; 
         lista_fecha_int[0] = diaSuma;
     }
     let fechafinal1 = `${lista_fecha_int[0]}/${lista_fecha_int[1]}/${lista_fecha_int[2]}`;
@@ -70,9 +70,9 @@ function DiasPrecio(estadia,cuotas){
         resultado = precioEstadia24dias + precioEstadia24dias*CuotaInteres(cuotas);
     }
     else{
-        alert(`no joda`);
+        alert(`Faltan datos, complete la reserva nuevamente por favor, gracias!`);
     }
-    // alert(`El precio de los ${estadia} dias y en  ${cuotas} cuotas es de ${resultado}`);
+    // alert(`El precio de los ${estadia} dias y en ${cuotas} cuotas es de ${resultado}`);
     return resultado;
 }
 function CuotaInteres(cuotas){
