@@ -25,12 +25,32 @@ h1{
     font-size: 20px;
 }
 
-.carousel-item{
+.carousel-item img{
     border-radius: 10px;
+    height: 500px;
+    width: 500px;
+    padding: 50px;
     }
 
+
+
+.mb-3 row{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.fechaSelect {
+    padding: 0.375rem 0.75rem;
+}
+.opcion{
+    width: 82px;
+}
+
+strong{
+    background-color: #d0e9e9ff;
+}
+
 footer{
-    font-size: 20px;
+    font-size: 10px;
     font-style: black;
     background-color: #d0e9e9ff;
     text-align: center;

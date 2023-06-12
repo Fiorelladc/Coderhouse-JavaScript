@@ -1,11 +1,11 @@
-let reservaciones = [];
+/*let reservaciones = [];
 Ingreso();
 
 function calcular_estadia() {
     let nombre = prompt("INDICAR NOMBRE");
     let fecha = prompt("INDICAR FECHA DE INICIO CON EL FORMATO DD/MM/AAAA ( / obligatoria para separar)");
-    let estadia = parseInt(prompt("INDICAR CUANTOS DIAS QUIERE QUEDARSE? 7 ,14 o 21 o 24"));
-    let cuotas = parseInt(prompt("INGRESAR LA CANTIDAD DE CUOTAS: 1 , 3 ,6 o 12 o 24"));
+    let estadia = parseInt(prompt("INDICAR CUANTOS DIAS QUIERE QUEDARSE? 7, 14,  21 o 24"));
+    let cuotas = parseInt(prompt("INGRESAR LA CANTIDAD DE CUOTAS: 1, 3, 6, 12 o 24"));
     let resultado = DiasPrecio(estadia,cuotas);
     // numero aleatorio entre 10 y 100
     // Math.random() * (max - min) + min;
@@ -94,4 +94,14 @@ function Ingreso(){
     }
     alert("El usuario es mayor de edad, puede continuar a la reserva");
     calcular_estadia();
+}*/
+
+document.getElementById('boton').onclick=function ( ) {
+    console.log ("capturamos el evento click");
+    document.getElementById("boton").innerHTML="Su reserva se realizo con exito!";
+}
+
+document.getElementById('contacto').onclick=function ( ) {
+    console.log ("capturamos el evento click");
+    document.getElementById("boton").innerHTML="Su mensaje fue enviado con exito!";
 }
