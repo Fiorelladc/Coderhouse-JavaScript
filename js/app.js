@@ -115,9 +115,7 @@ document.getElementById('boton').onclick=function ( ) {
 document.getElementById('boton.borrar').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton.borrar").innerHTML="Su reserva fue eliminada";
-    if(reservaciones.length >=1){
-        localStorage.removeItem (reservaciones);
-    }
+    localStorage.removeItem(reservas);
 }
 
 document.getElementById('contacto').onclick=function ( ) {
