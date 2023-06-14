@@ -1,79 +1,99 @@
-/*let reservaciones = [];
-Ingreso();
-
-function calcular_estadia() {
-    let nombre = prompt("INDICAR NOMBRE");
-    let fecha = prompt("INDICAR FECHA DE INICIO CON EL FORMATO DD/MM/AAAA ( / obligatoria para separar)");
-    let estadia = parseInt(prompt("INDICAR CUANTOS DIAS QUIERE QUEDARSE? 7, 14,  21 o 24"));
-    let cuotas = parseInt(prompt("INGRESAR LA CANTIDAD DE CUOTAS: 1, 3, 6, 12 o 24"));
-    let resultado = DiasPrecio(estadia,cuotas);
-    // numero aleatorio entre 10 y 100
-    // Math.random() * (max - min) + min;
-    // floor = piso menor
-    // round = redondear
-    // ceil = top al mayor
-    let habitacion = Math.floor(Math.random() * (100 - 10)) + 10;
+const nombrehtml = document.querySelector('#inputname');
+const fechahtml = document.querySelector('#start');
+const estadiahtml = document.querySelector('#estadia');
+const cuotashtml = document.querySelector('#cuotas');
+const divValor = document.querySelector('#valordiv');
+const habitacionhtml = document.querySelector('#inputBedroom');
+const confirmar_Reserva = document.querySelector('#boton');
+const valorHtml = document.querySelector('#reservas tbody');
+EventListeners();
+function EventListeners(){
+    confirmar_Reserva.addEventListener('click', AgregarObjeto);
+    document.addEventListener('DOMContentLoaded', ()=>{
+        reservaciones =  JSON.parse(localStorage.getItem('reservas')) || [];
+        mostrarReservacion();
+    })
+    estadiahtml.addEventListener("input", simuladorDeEstadia);
+    cuotashtml.addEventListener("input", simuladorDeEstadia);
+}
+function simuladorDeEstadia(){
+    const estadia = estadiahtml.value;
+    const cuotas = cuotashtml.value;
+    
+    if (estadia && cuotas) {
+        let valor = DiasPrecio(estadia,cuotas);
+        divValor.innerHTML = ``;
+        const valor_html = document.createElement('div');
+        valor_html.classList = "form-control";
+        valor_html.innerHTML = `${valor}`;
+        divValor.appendChild(valor_html);
+    }
+}
+function AgregarObjeto(e){
+    let nombre = nombrehtml.value;
+    let fecha = fechahtml.value;
+    let estadia = estadiahtml.value;
+    let cuotas = cuotashtml.value;
+    let habitacion = habitacionhtml.value;
+    let valor = DiasPrecio(estadia,cuotas);
     let EndDate = fechaFinal(fecha,estadia);
     const reservacion = {
         nombre,
         fecha,
         estadia,
         cuotas,
-        resultado,
         habitacion,
+        valor,
         EndDate
     }
     reservaciones.push(reservacion);
+    console.log(reservacion);
     mostrarReservacion();
 }
+let reservaciones = [];
 function mostrarReservacion(){
+    valorHtml.innerHTML = ``;
     reservaciones.forEach(reservacion => { 
-        alert(`${reservacion.nombre} tu reservacion con fecha ${reservacion.fecha} por ${reservacion.estadia} dias en ${reservacion.cuotas} cuotas con un precio final de ${reservacion.resultado} en la habitacion ${reservacion.habitacion} hasta la fecha ${reservacion.EndDate}`);
+        const fila = document.createElement('tr');
+        fila.innerHTML= `
+            <td>${reservacion.nombre}</td>
+            <td>${reservacion.estadia}</td>
+            <td>${reservacion.cuotas}</td>
+            <td>${reservacion.habitacion}</td>
+            <td>${reservacion.fecha}</td>
+            <td>${reservacion.EndDate}</td>
+            <td>$${reservacion.valor}</td>
+        `
+        valorHtml.appendChild(fila);
     })
+    localStorage.setItem('reservas', JSON.stringify(reservaciones));
 }
 function fechaFinal(fecha, estadia){
-    const lista_fecha = fecha.split('/')
-    
-    let lista_fecha_int = [];
-    lista_fecha.forEach(element => {
-        lista_fecha_int.push(parseInt(element))
-    });
-    if(lista_fecha_int[0]+estadia > 30){
-        console.log("entre");
-        lista_fecha_int[1] = lista_fecha_int[1] + 1;
-        let diaSuma = lista_fecha_int[0]+estadia;
-        DiaFinal = diaSuma - 30; 
-        lista_fecha_int[0] = DiaFinal;
-    }else{
-        let diaSuma = lista_fecha_int[0]+estadia; 
-        lista_fecha_int[0] = diaSuma;
-    }
-    let fechafinal1 = `${lista_fecha_int[0]}/${lista_fecha_int[1]}/${lista_fecha_int[2]}`;
-    return fechafinal1;
+    let fecha1 = new Date(fecha);
+    let estadia1 = parseInt(estadia);
+    fecha1.setDate(fecha1.getDate() + estadia1);
+    let fechaActualFormateada = fecha1.toISOString().split('T')[0];
+    return fechaActualFormateada;
 }
 function DiasPrecio(estadia,cuotas){
     let precioEstadia7dias = 50000;
     let precioEstadia14dias = 60000;
     let precioEstadia21dias = 70000;
     let precioEstadia24dias = 80000;
-    let resultado = 0;
+    let valor = 0;
     if(estadia <= 7){
-        resultado = precioEstadia7dias + precioEstadia7dias*CuotaInteres(cuotas);
+        valor = precioEstadia7dias + precioEstadia7dias*CuotaInteres(cuotas);
     }
     else if(estadia <= 14){
-        resultado = precioEstadia14dias + precioEstadia14dias*CuotaInteres(cuotas);
+        valor = precioEstadia14dias + precioEstadia14dias*CuotaInteres(cuotas);
     }
     else if(estadia <= 21){
-        resultado = precioEstadia21dias + precioEstadia21dias*CuotaInteres(cuotas);
+        valor = precioEstadia21dias + precioEstadia21dias*CuotaInteres(cuotas);
     }
     else if(estadia <= 24){
-        resultado = precioEstadia24dias + precioEstadia24dias*CuotaInteres(cuotas);
+        valor = precioEstadia24dias + precioEstadia24dias*CuotaInteres(cuotas);
     }
-    else{
-        alert(`Faltan datos, complete la reserva nuevamente por favor, gracias!`);
-    }
-    // alert(`El precio de los ${estadia} dias y en ${cuotas} cuotas es de ${resultado}`);
-    return resultado;
+    return valor;
 }
 function CuotaInteres(cuotas){
     const interes = {
@@ -86,19 +106,18 @@ function CuotaInteres(cuotas){
     return interes[cuotas] || 0;
 
 }
-function Ingreso(){
-    let edad = parseInt(prompt("Ingresar edad"))
-    while( edad <= 17 ){
-        alert("El usuario es menor de edad");
-        edad = parseInt(prompt("Ingrese nuevamente su edad"));
-    }
-    alert("El usuario es mayor de edad, puede continuar a la reserva");
-    calcular_estadia();
-}*/
 
 document.getElementById('boton').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton").innerHTML="Su reserva se realizo con exito!";
+}
+
+document.getElementById('boton.borrar').onclick=function ( ) {
+    console.log ("capturamos el evento click");
+    document.getElementById("boton.borrar").innerHTML="Su reserva fue eliminada";
+    if(reservaciones.length >=1){
+        localStorage.removeItem (reservaciones);
+    }
 }
 
 document.getElementById('contacto').onclick=function ( ) {
