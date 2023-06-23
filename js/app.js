@@ -110,13 +110,21 @@ function CuotaInteres(cuotas){
 document.getElementById('boton').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton").innerHTML="Su reserva se realizo con exito!";
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Reserva Exitosa!',
+        showConfirmButton: false,
+        timer: 1500
+    })
 }
 
 document.getElementById('boton.borrar').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton.borrar").innerHTML="Su reserva fue eliminada";
-    localStorage.removeItem(reservas);
+    localStorage.removeItem("reservas");
 }
+
 
 document.getElementById('contacto').onclick=function ( ) {
     console.log ("capturamos el evento click");
