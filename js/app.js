@@ -104,9 +104,9 @@ function CuotaInteres(cuotas){
         24 : 0.60
     }
     return interes[cuotas] || 0;
-
 }
 
+//Boton Confirmar reserva
 document.getElementById('boton').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton").innerHTML="Su reserva se realizo con exito!";
@@ -119,12 +119,13 @@ document.getElementById('boton').onclick=function ( ) {
     })
 }
 
+//Boton eliminar reserva
 document.getElementById('boton.borrar').onclick=function ( ) {
     console.log ("capturamos el evento click");
     document.getElementById("boton.borrar").innerHTML="Su reserva fue eliminada";
-    localStorage.removeItem("reservas");
 }
 
+localStorage.clear();
 
 document.getElementById('contacto').onclick=function ( ) {
     console.log ("capturamos el evento click");

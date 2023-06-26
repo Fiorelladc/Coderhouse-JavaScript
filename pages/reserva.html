@@ -19,97 +19,107 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">Estancia Los Colibries
-                <img class="icono" src="../imagenes/colibri.jpg" alt="icono">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="icono" src="../imagenes/colibri.jpg" alt="icono">
+            <a class="navbar-brand" href="../index.html"> Estancia Los Colibries</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="reserva.html">Reserva</a>
-                </div>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="./Contactenos.html">Contactenos
-                        <img src="../imagenes/wp.png" alt="whatsapp"></a>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./reserva.html">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Contactenos.html">Contactenos</a>
+                    </li>
+                    <li>
+                        <img src="../imagenes/wp.png" alt="whatsapp">
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
 <h1>Reserva</h1>
 
-<div class="mb-3 row">
-    <label for="inputName" class="col-sm-3 col-form-label"> <strong>Nombre</strong></label>
-    <div class="col-sm-10">
-        <input type="name" class="form-control" id="inputname">
+<div class="card" style="width: 40rem;">
+    <img class="img-reserva" src="../imagenes/estancia.jpg" class="card-img-top" alt="Imagen reserva">
+    <div class="card-body">
+        <h5 class="card-title">Reserva</h5>
+        <p class="card-text"> Aqui le brindamos todos los detalles de la reserva.</p>
     </div>
-</div>
-
-<div class="mb-3 row">
-    <label for="inputFecha" class="col-sm-3 col-form-label"><strong>Fecha:</strong></label>
-    <label><strong>Conmienzo de estadia</strong></label>
-    <input class="col-sm-10" class="fechaSelect" type="date" id="start" name="trip-start" min="2023-06-12" max="2023-12-31">
-</div>
-
-<select class="col-sm-10" class="form-select" aria-label="Default select example" id="estadia">
-    <option selected>Estadia</option>
-    <option value="7">7</option>
-    <option value="14">14</option>
-    <option value="21">21</option>
-    <option value="24">24</option>
-</select>
-
-<select class="col-sm-10" class="form-select" aria-label="Default select example" id="cuotas">
-    <option selected>Cuotas</option>
-    <option value="1">1</option>
-    <option value="3">3</option>
-    <option value="6">6</option>
-    <option value="12">12</option>
-    <option value="14">14</option>
-</select>
-
-<div class="mb-3 row">
-    <label for="inputResult" class="col-sm-3 col-form-label"> <strong>Valor</strong></label>
-    <div class="col-sm-10" id="valordiv">
-        SIMULADOR DE ESTADIA
+    <div class="mb-3 row">
+        <label for="inputName" class="col-sm-3 col-form-label"> <strong>Nombre</strong></label>
+        <div class="col-sm-10">
+            <input type="name" class="form-control" id="inputname">
+        </div>
     </div>
-</div>
-
-<div class="mb-3 row">
-    <label for="inputBedroom" class="col-sm-3 col-form-label"><strong>Habitacion</strong></label>
-    <div class="col-sm-10">
-        <input type="bedroom" class="form-control" id="inputBedroom">
+    
+    <div class="mb-3 row">
+        <label for="inputFecha" class="col-sm-3 col-form-label"><strong>Fecha:</strong></label>
+        <label><strong>Conmienzo de estadia</strong></label>
+        <input class="col-sm-10" class="fechaSelect" type="date" id="start" name="trip-start" min="2023-06-12" max="2023-12-31">
     </div>
-</div>
-<div id="reservas">
-    <table id="lista-reserva" class="u-full-width">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Estadia</th>
-                <th>Cuotas</th>
-                <th>Habitacion</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Precio Total</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-</div>
-
+    
+    <select class="col-sm-10" class="form-select" aria-label="Default select example" id="estadia">
+        <option selected>Cantidad de dias</option>
+        <option value="7">7</option>
+        <option value="14">14</option>
+        <option value="21">21</option>
+        <option value="24">24</option>
+    </select>
+    
+    <select class="col-sm-10" class="form-select" aria-label="Default select example" id="cuotas">
+        <option selected>Cuotas</option>
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="6">6</option>
+        <option value="12">12</option>
+        <option value="14">14</option>
+    </select>
+    
+    <div class="mb-3 row">
+        <label for="inputResult" class="col-sm-3 col-form-label"> <strong>Valor:</strong></label>
+        <div class="col-sm-10" id="valordiv">
+            SIMULADOR DE ESTADIA
+        </div>
+    </div>
+    
+    <div class="mb-3 row">
+        <label for="inputBedroom" class="col-sm-3 col-form-label"><strong>Habitacion:</strong></label>
+        <div class="col-sm-10">
+            <input type="bedroom" class="form-control" id="inputBedroom">
+        </div>
+    </div>
+    <div id="reservas">
+        <table id="lista-reserva" class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Estadia</th>
+                    <th>Cuotas</th>
+                    <th>Habitacion</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Precio Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
     <div>
         <button class="Swal.fire" type="button" id="boton"> Confirmar reserva </button>
-    </div>
-    <div>
         <button type="button" id="boton.borrar"> Eliminar reserva </button>
     </div>
+
+</div>
+
 
     <footer>
         <div class="container flex justify-space-between footer-box">
