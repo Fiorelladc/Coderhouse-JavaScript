@@ -55,10 +55,6 @@ h1{
     margin-right: 30px;
 }
 
-.icono-wp{
-    margin-left: 50px;
-}
-
 .carrousel{
     height: 400px;
     width: 200px;
@@ -66,7 +62,7 @@ h1{
 }
 
 .carousel-item img{
-    height: 600px;
+    height: 700px;
     width: 100px;
     padding: 80px;
     }
@@ -83,15 +79,17 @@ h1{
 
 h5{
     background-color: #6e6d6d;
+    text-align: center;
 }
 .descripcion {
     background-color: #9d9d9d;
     margin-top: 0;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .card{
-    margin-left: 350px;
+    margin-left: 25%;
 }
 
 .img-reserva{

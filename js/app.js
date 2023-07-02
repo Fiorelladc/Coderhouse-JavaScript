@@ -1,11 +1,20 @@
-const nombrehtml = document.querySelector('#inputname');
-const fechahtml = document.querySelector('#start');
-const estadiahtml = document.querySelector('#estadia');
-const cuotashtml = document.querySelector('#cuotas');
-const divValor = document.querySelector('#valordiv');
-const habitacionhtml = document.querySelector('#inputBedroom');
-const confirmar_Reserva = document.querySelector('#boton');
-const valorHtml = document.querySelector('#reservas tbody');
+function mostrar_posicion ( posicion ){
+    let lat = posicion.coords.latitude;
+    let long = posicion.coords.longitude;
+    let key = "59d77087597269508f69cd5ecb34c058";
+
+    fetch ('https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${long}&appid=${key}&inits=metric&lang=es');
+    then ( response => response.json() )
+    then ( data =>{
+        document.body.innerHTML = 
+        <p>${data.name}</p>
+        <p> Temp: $ {data.mail.tempe} </p>
+        <p> Clima:${data.weather[0].description}</p>})
+
+    }
+
+navigator.geolocation.getCurrentPosition ( mostrar_posicion );
+
 EventListeners();
 function EventListeners(){
     confirmar_Reserva.addEventListener('click', AgregarObjeto);
@@ -29,27 +38,7 @@ function simuladorDeEstadia(){
         divValor.appendChild(valor_html);
     }
 }
-function AgregarObjeto(e){
-    let nombre = nombrehtml.value;
-    let fecha = fechahtml.value;
-    let estadia = estadiahtml.value;
-    let cuotas = cuotashtml.value;
-    let habitacion = habitacionhtml.value;
-    let valor = DiasPrecio(estadia,cuotas);
-    let EndDate = fechaFinal(fecha,estadia);
-    const reservacion = {
-        nombre,
-        fecha,
-        estadia,
-        cuotas,
-        habitacion,
-        valor,
-        EndDate
-    }
-    reservaciones.push(reservacion);
-    console.log(reservacion);
-    mostrarReservacion();
-}
+
 let reservaciones = [];
 function mostrarReservacion(){
     valorHtml.innerHTML = ``;
@@ -125,7 +114,7 @@ document.getElementById('boton.borrar').onclick=function ( ) {
     document.getElementById("boton.borrar").innerHTML="Su reserva fue eliminada";
 }
 
-localStorage.clear();
+window.localStorage.clear();
 
 document.getElementById('contacto').onclick=function ( ) {
     console.log ("capturamos el evento click");
