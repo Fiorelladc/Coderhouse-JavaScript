@@ -1,20 +1,3 @@
-function mostrar_posicion ( posicion ){
-    let lat = posicion.coords.latitude;
-    let long = posicion.coords.longitude;
-    let key = "59d77087597269508f69cd5ecb34c058";
-
-    fetch ('https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${long}&appid=${key}&inits=metric&lang=es');
-    then ( response => response.json() )
-    then ( data =>{
-        document.body.innerHTML = 
-        <p>${data.name}</p>
-        <p> Temp: $ {data.mail.tempe} </p>
-        <p> Clima:${data.weather[0].description}</p>})
-
-    }
-
-navigator.geolocation.getCurrentPosition ( mostrar_posicion );
-
 EventListeners();
 function EventListeners(){
     confirmar_Reserva.addEventListener('click', AgregarObjeto);
@@ -39,7 +22,61 @@ function simuladorDeEstadia(){
     }
 }
 
-let reservaciones = [];
+//api divisas
+
+async function calcularDivisa(){
+    bandera = false;
+    let monedaCambio = 0 ;
+    try {
+        moneda_one = monedaEl_one.value;
+        
+        const reponse = await fetch(`https://api.exchangerate-api.com/v4/latest/ARS`);
+        const data = await reponse.json();
+        const taza = data.rates[moneda_one];
+        const estadia = estadiahtml.value;
+        const cuotas = cuotashtml.value;
+        let valor = DiasPrecio(estadia,cuotas); // 7-1 : 50000
+        monedaCambio = (valor * taza).toFixed(2); //194.00
+        console.log(`monedaCambio1 ${monedaCambio}`);
+    }catch{
+        console.log('error');
+    }
+    try {
+        moneda_two = monedaEl_two.value;
+        console.log(moneda_one);
+        console.log(moneda_two);
+        const reponse = await fetch(`https://api.exchangerate-api.com/v4/latest/${moneda_one}`);
+        const data = await reponse.json();
+        const taza = data.rates[moneda_two]; // 257.95 * 194
+        monedaCambio = (monedaCambio * taza).toFixed(2); // 5042
+        cambioEl.innerText = `1 ${moneda_one} = ${taza} ${moneda_two}`;
+        console.log(`monedaCambio2 ${monedaCambio}`);
+    }catch{
+        console.log('error');
+    }
+    const valor_html = document.createElement('div');
+    valor_html.classList = "form-control";
+    valor_html.innerHTML = `${monedaCambio}`;
+    while (divValor.firstChild) {
+        divValor.removeChild(divValor.firstChild);
+    }
+    divValor.appendChild(valor_html);
+    moneda_two = monedaEl_two.value;
+    const cambioactual = document.querySelector('#CambioActual');
+    cambioactual.innerText = `El Cambio actual es ${moneda_two}`;
+    return monedaCambio; // precio final en la divisa que busco
+}
+function cambioMoneda(){
+    monedaEl_one = document.getElementById('moneda-uno');
+    monedaEl_two = document.getElementById('moneda-dos');
+    temp = monedaEl_one.value;
+    moneda_one = monedaEl_two.value;
+    moneda_two = temp;
+    calcularDivisa();
+}
+
+//reservacion 
+
 function mostrarReservacion(){
     valorHtml.innerHTML = ``;
     reservaciones.forEach(reservacion => { 
@@ -55,7 +92,7 @@ function mostrarReservacion(){
         `
         valorHtml.appendChild(fila);
     })
-    localStorage.setItem('reservas', JSON.stringify(reservaciones));
+    
 }
 function fechaFinal(fecha, estadia){
     let fecha1 = new Date(fecha);
@@ -115,6 +152,8 @@ document.getElementById('boton.borrar').onclick=function ( ) {
 }
 
 window.localStorage.clear();
+
+//Boton enviar mensaje
 
 document.getElementById('contacto').onclick=function ( ) {
     console.log ("capturamos el evento click");
